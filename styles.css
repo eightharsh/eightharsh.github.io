@@ -1,0 +1,791 @@
+
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #161616;
+  --text-secondary: #525252;
+  --accent-color: #0f62fe;
+  --accent-color-rgb: 15, 98, 254;
+  --surface-color: #e0e0e0;
+  --font-sans: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --page-max-width: 960px;
+  --sidebar-width: 260px;
+  --content-max-width: 680px;
+  --toc-width: 200px;
+  --trans-dur: 0.2s;
+  --trans-timing: ease-in-out;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* Page Wrapper */
+.page-wrapper {
+  display: flex;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding-top: 1.5rem;
+}
+
+/* Specific wrapper for talk and article detail pages */
+.talk-detail-wrapper,
+.article-detail-wrapper {
+  position: relative;
+  padding-left: calc(var(--toc-width) + 2rem); /* Space for TOC */
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  padding: 0 1.5rem;
+}
+
+.sidebar-header {
+  margin-bottom: 2rem;
+}
+
+.sidebar-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-bio {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.side-nav ul {
+  list-style: none;
+}
+
+.side-nav ul li {
+  margin-bottom: 0.75rem;
+}
+
+.side-nav ul li a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  transition: color var(--trans-dur) var(--trans-timing);
+}
+
+.side-nav ul li a:hover {
+  color: var(--accent-color);
+}
+
+.side-nav ul li a.active {
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  max-width: var(--content-max-width);
+  padding: 0 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* On talk and article detail pages, main content takes full width */
+.talk-detail-wrapper .main-content,
+.article-detail-wrapper .main-content {
+  max-width: 100%;
+}
+
+/* Post (Used in About, Contact, and Now Pages) */
+.post {
+  margin-bottom: 2rem;
+}
+
+.post-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.post-meta {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  margin-bottom: 0.5rem;
+}
+
+.post p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.post p a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color var(--trans-dur) var(--trans-timing);
+}
+
+.post p a:hover {
+  color: var(--text-color);
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Increased gap for better spacing */
+  max-width: 100%;
+  background-color: var(--bg-color);
+  padding: 1.5rem;
+  border: 1px solid var(--surface-color);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Increased gap between label and input */
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-color);
+  text-transform: uppercase; /* Matches IBM/Carbon style */
+  letter-spacing: 0.02em;
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  padding: 0.75rem; /* Increased padding for better touch targets */
+  border: 1px solid var(--surface-color);
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: border-color var(--trans-dur) var(--trans-timing), box-shadow var(--trans-dur) var(--trans-timing);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.2); /* Subtle glow on focus */
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px; /* Ensure textarea has enough height for messages */
+}
+
+.form-submit {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.75rem 2rem; /* Wider padding for better click area */
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color var(--trans-dur) var(--trans-timing), transform var(--trans-dur) var(--trans-timing);
+  align-self: flex-start; /* Align button to the left */
+}
+
+.form-submit:hover {
+  background-color: #003087; /* Darker shade of accent color for hover */
+  transform: translateY(-1px); /* Subtle lift effect on hover */
+}
+
+.form-submit:disabled {
+  background-color: var(--surface-color);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Form Feedback Message */
+#form-feedback {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: rgba(var(--accent-color-rgb), 0.1); /* Light background for success */
+}
+
+#form-feedback[style*="color: green"] {
+  background-color: rgba(0, 128, 0, 0.1); /* Light green background for success */
+}
+
+#form-feedback[style*="color: red"] {
+  background-color: rgba(255, 0, 0, 0.1); /* Light red background for error */
+}
+
+/* Back to All Articles Link (Not used in Contact page, but kept for consistency) */
+.back-to-articles {
+  margin-bottom: 1rem;
+}
+
+.back-link {
+  font-size: 0.875rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color var(--trans-dur) var(--trans-timing);
+}
+
+.back-link:hover {
+  color: var(--text-color);
+}
+
+/* Projects List (Vertical Layout) */
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.project-box {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  border: 1px solid var(--surface-color);
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--trans-dur) var(--trans-timing);
+  height: 12rem;
+}
+
+.project-box:hover {
+  border-color: var(--accent-color);
+}
+
+.project-header {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--surface-color);
+}
+
+.project-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.github-link {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--text-secondary);
+  transition: color var(--trans-dur) var(--trans-timing);
+}
+
+.github-link:hover {
+  color: var(--accent-color);
+}
+
+.github-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.project-abstract {
+  flex: 2;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.project-abstract p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Articles List (Vertical Layout) */
+.articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.article-box {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  border: 1px solid var(--surface-color);
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--trans-dur) var(--trans-timing);
+  height: 12rem;
+}
+
+.article-box:hover {
+  border-color: var(--accent-color);
+}
+
+.article-header {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--surface-color);
+}
+
+.article-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  flex: 1;
+}
+
+.article-date {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.article-abstract {
+  flex: 2;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.article-abstract p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Detailed Article Page */
+.article-detail {
+  margin-bottom: 2rem;
+}
+
+.article-detail-header {
+  margin-bottom: 2rem;
+}
+
+.article-detail-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.article-meta {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.article-section {
+  margin-bottom: 2rem;
+}
+
+/* Detailed Talk Page */
+.talk-detail {
+  margin-bottom: 2rem;
+}
+
+.talk-detail-header {
+  margin-bottom: 2rem;
+}
+
+.talk-detail-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.talk-meta {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.talk-section {
+  margin-bottom: 2rem;
+}
+
+.talk-section h2,
+.article-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.talk-section p,
+.article-section p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.talk-section ul,
+.article-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.talk-section ul li,
+.article-section ul li {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.talk-section ul li strong,
+.article-section ul li strong {
+  color: var(--text-color);
+}
+
+.talk-section code,
+.article-section code {
+  font-family: var(--font-mono);
+  background-color: var(--surface-color);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+
+/* Embedded YouTube Video */
+.video-embed {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  margin-bottom: 1rem;
+}
+
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Article Navigation (Previous/Next) */
+.article-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--surface-color);
+}
+
+.nav-previous,
+.nav-next {
+  flex: 1;
+}
+
+.nav-previous {
+  text-align: left;
+}
+
+.nav-next {
+  text-align: right;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color var(--trans-dur) var(--trans-timing);
+}
+
+.nav-link:hover {
+  color: var(--text-color);
+}
+
+/* Table of Contents (TOC) */
+.toc {
+  position: fixed;
+  top: 50%;
+  left: 1.5rem;
+  width: var(--toc-width);
+  transform: translateY(-50%);
+  padding: 1rem;
+  background-color: var(--bg-color);
+  border-right: 1px solid var(--surface-color);
+}
+
+.toc ul {
+  list-style: none;
+}
+
+.toc ul li {
+  margin-bottom: 0.5rem;
+}
+
+.toc-link {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--trans-dur) var(--trans-timing);
+}
+
+.toc-link:hover {
+  color: var(--accent-color);
+}
+
+.toc-link.active {
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+/* Social Icons (In Footer) */
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  color: var(--text-secondary);
+  transition: color var(--trans-dur) var(--trans-timing);
+}
+
+.social-icons a:hover {
+  color: var(--accent-color);
+}
+
+.social-icons .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Footer */
+footer.footer {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.footer-copy {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-left: var(--sidebar-width);
+}
+
+/* On talk and article detail pages, adjust footer alignment */
+.talk-detail-wrapper + .footer .footer-copy,
+.article-detail-wrapper + .footer .footer-copy {
+  margin-left: calc(var(--toc-width) + 2rem);
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .page-wrapper {
+    flex-direction: column;
+    padding-top: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+
+  /* Horizontal Navigation on Mobile */
+  .side-nav ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .side-nav ul li {
+    margin-bottom: 0;
+  }
+
+  .side-nav ul li a {
+    font-size: 0.875rem;
+    white-space: nowrap;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .main-content {
+    padding: 1rem 1.5rem;
+  }
+
+  .projects-list {
+    gap: 1rem;
+  }
+
+  .project-box {
+    height: auto;
+    min-height: 10rem;
+  }
+
+  .project-header {
+    padding: 0.75rem;
+  }
+
+  .project-title {
+    font-size: 1.125rem;
+  }
+
+  .project-abstract {
+    padding: 0.75rem;
+  }
+
+  .project-abstract p {
+    font-size: 0.875rem;
+  }
+
+  .articles-list {
+    gap: 1rem;
+  }
+
+  .article-box {
+    height: auto;
+    min-height: 10rem;
+  }
+
+  .article-header {
+    padding: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .article-title {
+    font-size: 1.125rem;
+  }
+
+  .article-date {
+    font-size: 0.75rem;
+  }
+
+  .article-abstract {
+    padding: 0.75rem;
+  }
+
+  .article-abstract p {
+    font-size: 0.875rem;
+  }
+
+  .talk-detail-wrapper,
+  .article-detail-wrapper {
+    padding-left: 0; /* Remove TOC space on mobile */
+  }
+
+  .talk-detail-title,
+  .article-detail-title {
+    font-size: 1.75rem;
+  }
+
+  .talk-section h2,
+  .article-section h2 {
+    font-size: 1.25rem;
+  }
+
+  /* Article Navigation on Mobile */
+  .article-navigation {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-previous,
+  .nav-next {
+    text-align: left;
+  }
+
+  /* Hide TOC on mobile */
+  .toc {
+    display: none;
+  }
+
+  footer.footer {
+    padding: 1rem 0;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1.5rem;
+  }
+
+  .footer-copy {
+    margin-left: 0 !important; /* Override for mobile */
+  }
+
+  /* Contact Form on Mobile */
+  .contact-form {
+    gap: 1rem; /* Reduced gap for mobile */
+    padding: 1rem;
+  }
+
+  .form-group {
+    gap: 0.25rem; /* Reduced gap between label and input */
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+
+  .form-group textarea {
+    min-height: 100px; /* Slightly smaller textarea on mobile */
+  }
+
+  .form-submit {
+    font-size: 0.875rem;
+    padding: 0.5rem 1.5rem;
+    width: 100%; /* Full-width button on mobile */
+    align-self: stretch; /* Stretch to full width */
+  }
+
+  #form-feedback {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+}
+
